@@ -1,6 +1,6 @@
 # Firefly Common Core Library - Step Events Integration Sample Configuration
 # This file demonstrates all available configuration options for integrating lib-transactional-engine
-# with lib-common-core messaging infrastructure
+# with fireflyframework-core messaging infrastructure
 
 spring:
   profiles:
@@ -170,9 +170,9 @@ firefly:
 # Logging configuration for development
 logging:
   level:
-    com.firefly: DEBUG
-    com.firefly.transactional: DEBUG
-    com.firefly.common.core.messaging: DEBUG
+    org.fireflyframework: DEBUG
+    org.fireflyframework.transactional: DEBUG
+    org.fireflyframework.core.messaging: DEBUG
     org.springframework: WARN
     reactor: WARN
   pattern:

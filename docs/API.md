@@ -25,7 +25,7 @@ This document provides comprehensive API reference for all Firefly Common Core c
 #### EventPublisher Interface
 
 ```java
-package com.firefly.common.core.messaging.publisher;
+package org.fireflyframework.core.messaging.publisher;
 
 public interface EventPublisher {
     /**
@@ -66,7 +66,7 @@ public interface EventPublisher {
 #### ConnectionAwarePublisher Interface
 
 ```java
-package com.firefly.common.core.messaging.publisher;
+package org.fireflyframework.core.messaging.publisher;
 
 public interface ConnectionAwarePublisher {
     /**
@@ -90,7 +90,7 @@ public interface ConnectionAwarePublisher {
 #### @PublishResult Annotation
 
 ```java
-package com.firefly.common.core.messaging.annotation;
+package org.fireflyframework.core.messaging.annotation;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -142,7 +142,7 @@ public @interface PublishResult {
 #### @EventListener Annotation
 
 ```java
-package com.firefly.common.core.messaging.annotation;
+package org.fireflyframework.core.messaging.annotation;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
@@ -185,7 +185,7 @@ public @interface EventListener {
 ### Publisher Types
 
 ```java
-package com.firefly.common.core.messaging.annotation;
+package org.fireflyframework.core.messaging.annotation;
 
 public enum PublisherType {
     EVENT_BUS,          // Spring Application Event Bus
@@ -203,7 +203,7 @@ public enum PublisherType {
 ### EventPublisherFactory
 
 ```java
-package com.firefly.common.core.messaging.publisher;
+package org.fireflyframework.core.messaging.publisher;
 
 @Component
 public class EventPublisherFactory {
@@ -322,7 +322,7 @@ public class OrderEventHandler {
 ### MessagingProperties
 
 ```java
-package com.firefly.common.core.messaging.config;
+package org.fireflyframework.core.messaging.config;
 
 @Configuration
 @ConfigurationProperties(prefix = "messaging")
@@ -380,7 +380,7 @@ public class MessagingProperties {
 ### ServiceRegistryHelper
 
 ```java
-package com.firefly.common.core.config.registry;
+package org.fireflyframework.core.config.registry;
 
 @Component
 public class ServiceRegistryHelper {
@@ -466,7 +466,7 @@ public class PaymentService {
 ### WebClientProperties
 
 ```java
-package com.firefly.common.core.config;
+package org.fireflyframework.core.config;
 
 @Configuration
 @ConfigurationProperties(prefix = "webclient")
@@ -585,7 +585,7 @@ public interface HealthIndicator {
 #### MessagingHealthIndicator
 
 ```java
-package com.firefly.common.core.actuator.health;
+package org.fireflyframework.core.actuator.health;
 
 @Component
 @ConditionalOnProperty(prefix = "management.health.messaging", name = "enabled", havingValue = "true", matchIfMissing = true)
@@ -677,7 +677,7 @@ public class DatabaseHealthIndicator implements HealthIndicator {
 ### StepEventPublisherBridge
 
 ```java
-package com.firefly.common.core.messaging.stepevents;
+package org.fireflyframework.core.messaging.stepevents;
 
 @Component
 @ConditionalOnProperty(prefix = "step-events", name = "enabled", havingValue = "true")
@@ -749,7 +749,7 @@ public class StepEventPublisherBridge implements StepEventPublisher {
 ### StepEventsProperties
 
 ```java
-package com.firefly.common.core.messaging.config;
+package org.fireflyframework.core.messaging.config;
 
 @Configuration
 @ConfigurationProperties(prefix = "step-events")
@@ -785,7 +785,7 @@ public class StepEventsProperties {
 ### MessageSerializer Interface
 
 ```java
-package com.firefly.common.core.messaging.serialization;
+package org.fireflyframework.core.messaging.serialization;
 
 public interface MessageSerializer {
     /**
@@ -834,7 +834,7 @@ public interface MessageSerializer {
 ### SerializerFactory
 
 ```java
-package com.firefly.common.core.messaging.serialization;
+package org.fireflyframework.core.messaging.serialization;
 
 @Component
 public class SerializerFactory {
@@ -878,7 +878,7 @@ public class SerializerFactory {
 ### Serialization Formats
 
 ```java
-package com.firefly.common.core.messaging.serialization;
+package org.fireflyframework.core.messaging.serialization;
 
 public enum SerializationFormat {
     JSON("application/json"),

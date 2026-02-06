@@ -6,13 +6,13 @@
 [![Java Version](https://img.shields.io/badge/Java-21%2B-orange)](https://openjdk.java.net/projects/jdk/21/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.2-green)](https://spring.io/projects/spring-boot)
 
-A Spring Boot library providing utilities, configuration, and shared infrastructure components for the **core-infrastructure layer** of the **Firefly OpenCore Banking Platform**.
+A Spring Boot library providing utilities, configuration, and shared infrastructure components for the **core-infrastructure layer** of the **Firefly Framework**.
 
 This library is developed by **Firefly Software Solutions Inc** and released under the Apache 2.0 License.
 
 ## Overview
 
-The Firefly Common Core library is part of the Firefly OpenCore Banking Platform architecture, specifically designed for the core-infrastructure layer. It complements the [lib-common-domain](../lib-common-domain/) library which handles domain-layer concerns.
+The Firefly Common Core library is part of the Firefly Framework architecture, specifically designed for the core-infrastructure layer. It complements the [fireflyframework-domain](../fireflyframework-domain/) library which handles domain-layer concerns.
 
 
 ## Features
@@ -40,7 +40,7 @@ The Firefly Common Core library is part of the Firefly OpenCore Banking Platform
 - **Actuator enhancements** for production monitoring
 
 ### Integration Support
-- **CQRS integration** with lib-common-cqrs
+- **CQRS integration** with fireflyframework-cqrs
 - **Transactional engine** support with lib-transactional-engine
 - **Reactive patterns** throughout the library
 
@@ -49,15 +49,15 @@ The Firefly Common Core library is part of the Firefly OpenCore Banking Platform
 ### Maven
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-core</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-core</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-implementation 'com.firefly:lib-common-core:1.0.0-SNAPSHOT'
+implementation 'org.fireflyframework:fireflyframework-core:1.0.0-SNAPSHOT'
 ```
 
 ## 🚀 Quick Start
@@ -533,8 +533,8 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 ```bash
 # Clone repository
-git clone https://github.com/firefly-oss/lib-common-core.git
-cd lib-common-core
+git clone https://github.org/fireflyframework-oss/fireflyframework-core.git
+cd fireflyframework-core
 
 # Build and test
 ./mvnw clean test
@@ -552,13 +552,13 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## 🔗 Related Projects
 
-- [lib-common-cqrs](../lib-common-cqrs/) - CQRS patterns and event sourcing
+- [fireflyframework-cqrs](../fireflyframework-cqrs/) - CQRS patterns and event sourcing
 - [lib-transactional-engine](../lib-transactional-engine/) - Transaction orchestration
-- [lib-common-domain](../lib-common-domain/) - Domain layer utilities
+- [fireflyframework-domain](../fireflyframework-domain/) - Domain layer utilities
 
 ## 📄 License
 
-Copyright 2025 Firefly Software Solutions Inc
+Copyright 2024-2026 Firefly Software Solutions Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

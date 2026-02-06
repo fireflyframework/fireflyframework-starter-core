@@ -4,7 +4,7 @@
 *Copyright (c) 2025 Firefly Software Solutions Inc*  
 *Licensed under the Apache License, Version 2.0*
 
-Quick start guide for the Firefly Common Core library - infrastructure components for the **Firefly OpenCore Banking Platform**.
+Quick start guide for the Firefly Common Core library - infrastructure components for the **Firefly Framework**.
 
 ## Prerequisites
 
@@ -21,8 +21,8 @@ Add to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>com.firefly</groupId>
-    <artifactId>lib-common-core</artifactId>
+    <groupId>org.fireflyframework</groupId>
+    <artifactId>fireflyframework-core</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 
@@ -38,7 +38,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```gradle
-implementation 'com.firefly:lib-common-core:1.0.0-SNAPSHOT'
+implementation 'org.fireflyframework:fireflyframework-core:1.0.0-SNAPSHOT'
 
 // Optional: Add specific messaging providers
 implementation 'org.springframework.kafka:spring-kafka'
@@ -76,8 +76,8 @@ Create a simple REST controller that publishes messages:
 ```java
 package com.example.demo;
 
-import com.firefly.common.core.messaging.annotation.PublishResult;
-import com.firefly.common.core.messaging.annotation.PublisherType;
+import org.fireflyframework.core.messaging.annotation.PublishResult;
+import org.fireflyframework.core.messaging.annotation.PublisherType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -117,9 +117,9 @@ Create an event handler to process published events:
 ```java
 package com.example.demo;
 
-import com.firefly.common.core.messaging.annotation.EventListener;
-import com.firefly.common.core.messaging.annotation.EventPayload;
-import com.firefly.common.core.messaging.annotation.EventHeaders;
+import org.fireflyframework.core.messaging.annotation.EventListener;
+import org.fireflyframework.core.messaging.annotation.EventPayload;
+import org.fireflyframework.core.messaging.annotation.EventHeaders;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import java.util.Map;
@@ -604,7 +604,7 @@ management:
 # Logging configuration
 logging:
   level:
-    com.firefly.common.core: INFO
+    org.fireflyframework.core: INFO
     org.springframework.kafka: WARN
     org.apache.kafka: WARN
   pattern:
@@ -625,7 +625,7 @@ logging:
    - Configure proper security and authentication
 
 3. **CQRS and Saga Integration**:
-   - Add `lib-common-cqrs` for command/query separation
+   - Add `fireflyframework-cqrs` for command/query separation
    - Add `lib-transactional-engine` for saga orchestration
    - Implement complex business workflows
 

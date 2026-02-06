@@ -1,7 +1,7 @@
 logging:
   level:
     root: INFO
-    com.firefly: DEBUG
+    org.fireflyframework: DEBUG
     org.springframework:
       web: INFO
       boot.autoconfigure: INFO

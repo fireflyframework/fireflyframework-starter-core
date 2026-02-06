@@ -719,7 +719,7 @@ management:
 
 logging:
   level:
-    com.firefly.common.core: DEBUG
+    org.fireflyframework.core: DEBUG
     org.springframework.kafka: INFO
 ```
 
@@ -766,7 +766,7 @@ service:
 
 logging:
   level:
-    com.firefly.common.core: INFO
+    org.fireflyframework.core: INFO
     org.springframework.kafka: WARN
 ```
 

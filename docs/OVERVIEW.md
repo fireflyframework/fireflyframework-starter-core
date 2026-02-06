@@ -5,20 +5,20 @@
 
 ## What is Firefly Common Core?
 
-Firefly Common Core is a Spring Boot library providing utilities, configuration, and shared infrastructure components for the **core-infrastructure layer** of the **Firefly OpenCore Banking Platform**.
+Firefly Common Core is a Spring Boot library providing utilities, configuration, and shared infrastructure components for the **core-infrastructure layer** of the **Firefly Framework**.
 
-Developed by **Firefly Software Solutions Inc**, this library serves as the foundational infrastructure layer for banking and financial applications, complementing the [lib-common-domain](../../lib-common-domain/) library which handles domain-layer concerns.
+Developed by **Firefly Software Solutions Inc**, this library serves as the foundational infrastructure layer for enterprise and mission-critical applications, complementing the [fireflyframework-domain](../../fireflyframework-domain/) library which handles domain-layer concerns.
 
 ### Platform Context
 
 ```
-Firefly OpenCore Banking Platform
-├── Banking Applications (Loans, Payments, Accounts, etc.)
-├── Domain Layer (lib-common-domain)
+Firefly Framework
+├── Domain Applications, Services, etc.
+├── Domain Layer (fireflyframework-domain)
 │   ├── Domain Models & Entities
 │   ├── Business Logic & Rules
 │   └── Domain Events
-└── Infrastructure Layer (lib-common-core) ← This Library
+└── Infrastructure Layer (fireflyframework-core) ← This Library
     ├── Messaging Abstraction
     ├── Configuration Management  
     ├── WebClient Enhancements
@@ -438,9 +438,9 @@ public class OrderService {
 ## Integration Ecosystem
 
 ### Firefly Ecosystem
-- **lib-common-cqrs**: Command/Query separation with event sourcing
+- **fireflyframework-cqrs**: Command/Query separation with event sourcing
 - **lib-transactional-engine**: Saga orchestration and transaction management
-- **lib-common-domain**: Domain-driven design components and patterns
+- **fireflyframework-domain**: Domain-driven design components and patterns
 
 ### Spring Ecosystem  
 - **Spring Boot 3.x**: Auto-configuration and actuator integration

@@ -4,7 +4,7 @@
 *Copyright (c) 2025 Firefly Software Solutions Inc*  
 *Licensed under the Apache License, Version 2.0*
 
-This document provides architectural documentation for the Firefly Common Core library, a core-infrastructure component of the **Firefly OpenCore Banking Platform**.
+This document provides architectural documentation for the Firefly Common Core library, a core-infrastructure component of the **Firefly Framework**.
 
 ## Table of Contents
 
@@ -21,20 +21,20 @@ This document provides architectural documentation for the Firefly Common Core l
 
 ## System Architecture
 
-Firefly Common Core follows a layered, modular architecture designed for banking and financial applications. The system is built on Spring Boot 3.2.2 with reactive programming support using Project Reactor.
+Firefly Common Core follows a layered, modular architecture designed for enterprise and mission-critical applications. The system is built on Spring Boot 3.2.2 with reactive programming support using Project Reactor.
 
 ### Platform Integration
 
-This library serves as the infrastructure layer within the Firefly OpenCore Banking Platform:
+This library serves as the infrastructure layer within the Firefly Framework:
 
 ```
-Firefly OpenCore Banking Platform
-├── Application Services (Banking, Payments, etc.)
-├── Domain Layer (lib-common-domain)
+Firefly Framework
+├── Application Services (Domain Services, etc.)
+├── Domain Layer (fireflyframework-domain)
 │   ├── Domain Models & Entities
 │   ├── Business Logic & Rules
 │   └── Domain Events
-└── Infrastructure Layer (lib-common-core) ← This Library
+└── Infrastructure Layer (fireflyframework-core) ← This Library
     ├── Messaging Abstraction
     ├── Configuration Management  
     ├── WebClient Enhancements
@@ -88,7 +88,7 @@ The library is organized into the following main packages:
 ### Package Structure
 
 ```
-com.firefly.common.core/
+org.fireflyframework.core/
 ├── actuator/                    # Enhanced Spring Boot Actuator
 │   ├── config/                  # Actuator configuration
 │   └── health/                  # Custom health indicators
