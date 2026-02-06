@@ -21,7 +21,7 @@ This document provides architectural documentation for the Firefly Common Core l
 
 ## System Architecture
 
-Firefly Common Core follows a layered, modular architecture designed for enterprise and mission-critical applications. The system is built on Spring Boot 3.2.2 with reactive programming support using Project Reactor.
+Firefly Common Core follows a layered, modular architecture designed for enterprise and mission-critical applications. The system is built on Spring Boot 3.5.9 with reactive programming support using Project Reactor.
 
 ### Platform Integration
 
