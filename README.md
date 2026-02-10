@@ -1,4 +1,6 @@
 # Firefly Common Core Library
+    
+[![CI](https://github.com/fireflyframework/fireflyframework-core/actions/workflows/ci.yml/badge.svg)](https://github.com/fireflyframework/fireflyframework-core/actions/workflows/ci.yml)
 
 **Copyright (c) 2025 Firefly Software Solutions Inc**
 
