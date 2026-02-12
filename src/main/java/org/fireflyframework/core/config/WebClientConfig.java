@@ -102,11 +102,14 @@ public class WebClientConfig {
         WebClient.Builder builder = WebClient.builder()
                 .filter((request, next) ->
                         Mono.deferContextual(ctx -> {
-                            String transactionId = ctx.get(TRANSACTION_ID_HEADER);
-                            ClientRequest newRequest = ClientRequest.from(request)
-                                    .header(TRANSACTION_ID_HEADER, transactionId)
-                                    .build();
-                            return next.exchange(newRequest);
+                            String transactionId = ctx.getOrDefault(TRANSACTION_ID_HEADER, null);
+                            if (transactionId != null) {
+                                ClientRequest newRequest = ClientRequest.from(request)
+                                        .header(TRANSACTION_ID_HEADER, transactionId)
+                                        .build();
+                                return next.exchange(newRequest);
+                            }
+                            return next.exchange(request);
                         }));
 
         // Apply advanced configuration options
@@ -143,11 +146,14 @@ public class WebClientConfig {
         WebClient.Builder builder = WebClient.builder()
                 .filter((request, next) ->
                         Mono.deferContextual(ctx -> {
-                            String transactionId = ctx.get(TRANSACTION_ID_HEADER);
-                            ClientRequest newRequest = ClientRequest.from(request)
-                                    .header(TRANSACTION_ID_HEADER, transactionId)
-                                    .build();
-                            return next.exchange(newRequest);
+                            String transactionId = ctx.getOrDefault(TRANSACTION_ID_HEADER, null);
+                            if (transactionId != null) {
+                                ClientRequest newRequest = ClientRequest.from(request)
+                                        .header(TRANSACTION_ID_HEADER, transactionId)
+                                        .build();
+                                return next.exchange(newRequest);
+                            }
+                            return next.exchange(request);
                         }));
 
         // Apply advanced configuration options
