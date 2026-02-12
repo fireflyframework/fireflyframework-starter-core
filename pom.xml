@@ -8,13 +8,16 @@
     <parent>
         <groupId>org.fireflyframework</groupId>
         <artifactId>fireflyframework-parent</artifactId>
-        <version>26.02.02</version>
+        <version>26.02.03</version>
         <relativePath/>
     </parent>
 
     <artifactId>fireflyframework-core</artifactId>
-    <version>26.02.02</version>
+    <version>26.02.03</version>
     <packaging>jar</packaging>
+
+    <name>Firefly Framework - Core</name>
+    <description>Core utilities and foundational components for the Firefly Framework ecosystem</description>
 
     <dependencies>
         <!-- Spring Boot Starters (versions managed by BOM) -->
