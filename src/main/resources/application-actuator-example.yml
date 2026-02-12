@@ -3,7 +3,7 @@ management:
   endpoints:
     # Enable or disable all endpoints
     enabled: true
-    
+
     # Web exposure configuration
     web:
       # Endpoints to expose via web. Use '*' for all endpoints or a comma-separated list
@@ -12,14 +12,14 @@ management:
       base-path: /actuator
       # Whether to include details in responses
       include-details: true
-    
+
     # JMX exposure configuration
     jmx:
       # Endpoints to expose via JMX. Use '*' for all endpoints or a comma-separated list
       exposure: "*"
       # Domain for JMX endpoints
       domain: org.springframework.boot
-  
+
   # Metrics configuration
   metrics:
     # Enable or disable metrics collection
@@ -28,47 +28,49 @@ management:
     tags:
       application: ${spring.application.name:application}
       environment: ${spring.profiles.active:default}
-    
+
     # Prometheus configuration
     prometheus:
       # Enable or disable Prometheus metrics endpoint
       enabled: true
       # Path for Prometheus metrics endpoint
       path: /actuator/prometheus
-  
+
   # Tracing configuration
+  # NOTE: Tracing is configured centrally by fireflyframework-observability.
+  # Use firefly.observability.tracing.bridge to switch between OTEL and BRAVE.
+  # See: fireflyframework-observability README for full configuration reference.
   tracing:
     # Enable or disable distributed tracing
-    enabled: true
-    
+    enabled: ${firefly.observability.tracing.enabled:true}
+
     # Sampling configuration
     sampling:
       # Probability for sampling traces (0.0 - 1.0)
-      probability: 0.1
-    
-    # Zipkin configuration
-    zipkin:
-      # Enable or disable Zipkin tracing
-      enabled: false
-      # Base URL for Zipkin server
-      base-url: http://localhost:9411
-      # Service name for Zipkin traces
-      service-name: ${spring.application.name:application}
-    
-    # Propagation configuration
+      # Use 1.0 for development, lower for production (e.g. 0.1 for 10%)
+      probability: ${firefly.observability.tracing.sampling-probability:1.0}
+
+    # Propagation configuration — composite propagator supports both W3C and B3
     propagation:
-      # Propagation types to use (B3, W3C, etc.)
-      type:
-        - B3
-        - W3C
-  
+      type: W3C,B3
+
+  # OTLP export — targets open-source otel-collector-contrib (otel/opentelemetry-collector-contrib)
+  # Default: gRPC (port 4317). Override with OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf for HTTP (port 4318)
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4317}}
+      transport: ${OTEL_EXPORTER_OTLP_PROTOCOL:grpc}
+    metrics:
+      export:
+        url: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT:http://localhost:4318/v1/metrics}
+
   # Health configuration
   health:
     # Whether to show details in health endpoint (never, when-authorized, always)
     show-details: always
     # Whether to show components in health endpoint
     show-components: true
-    
+
     # Disk space configuration
     disk-space:
       # Enable or disable disk space health check
@@ -77,6 +79,15 @@ management:
       threshold: 10MB
       # Path to check for disk space
       path: .
+
+# Observability — centrally configured by fireflyframework-observability
+firefly:
+  observability:
+    metrics:
+      exporter: PROMETHEUS                 # PROMETHEUS (default), OTLP, or BOTH
+    tracing:
+      bridge: OTEL                         # OTEL (default) or BRAVE
+      sampling-probability: 0.1            # 10% sampling for production
 
 # Logging configuration for tracing
 logging:

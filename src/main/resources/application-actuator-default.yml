@@ -3,7 +3,7 @@ management:
   endpoints:
     # Enable all endpoints by default
     enabled: true
-    
+
     # Web exposure configuration
     web:
       # Expose essential endpoints by default
@@ -12,7 +12,7 @@ management:
       base-path: /actuator
       # Include details in responses
       include-details: true
-  
+
   # Metrics configuration
   metrics:
     # Enable metrics collection
@@ -21,20 +21,30 @@ management:
     tags:
       application: ${spring.application.name:application}
       environment: ${spring.profiles.active:default}
-  
+
   # Health configuration
   health:
     # Show details in health endpoint
     show-details: always
     # Show components in health endpoint
     show-components: true
-    
+
     # Disk space configuration
     disk-space:
       # Enable disk space health check
       enabled: true
       # Threshold for disk space health check
       threshold: 10MB
+
+  # Tracing configuration
+  # NOTE: Tracing bridge (OTEL/BRAVE), sampling, and propagation are configured
+  # centrally by fireflyframework-observability via firefly.observability.tracing.*
+  tracing:
+    enabled: ${firefly.observability.tracing.enabled:true}
+    sampling:
+      probability: ${firefly.observability.tracing.sampling-probability:1.0}
+    propagation:
+      type: W3C,B3
 
 # Logging configuration for tracing
 logging:
