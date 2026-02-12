@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
@@ -30,7 +29,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 
-@Service
 @Slf4j
 @RequiredArgsConstructor
 public class WebClientTemplate {

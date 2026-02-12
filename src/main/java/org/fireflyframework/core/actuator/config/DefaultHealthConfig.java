@@ -17,6 +17,8 @@
 
 package org.fireflyframework.core.actuator.config;
 
+import org.fireflyframework.core.actuator.health.LoggingHealthIndicator;
+import org.fireflyframework.core.logging.config.LoggingProperties;
 import org.springframework.boot.actuate.autoconfigure.health.HealthContributorAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.health.HealthEndpointAutoConfiguration;
 import org.springframework.boot.actuate.health.HealthEndpoint;
@@ -24,6 +26,7 @@ import org.springframework.boot.actuate.health.Status;
 import org.springframework.boot.actuate.system.DiskSpaceHealthIndicator;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -70,5 +73,10 @@ public class DefaultHealthConfig {
         return new DiskSpaceHealthIndicator(new File(diskSpace.getPath()), threshold);
     }
 
-
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnBean(LoggingProperties.class)
+    public LoggingHealthIndicator loggingHealthIndicator(LoggingProperties loggingProperties) {
+        return new LoggingHealthIndicator(loggingProperties);
+    }
 }

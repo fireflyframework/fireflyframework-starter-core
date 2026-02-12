@@ -21,10 +21,6 @@ import org.fireflyframework.core.logging.LoggingUtils;
 import org.fireflyframework.core.logging.config.LoggingProperties;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 
 /**
@@ -42,9 +38,6 @@ import java.util.Map;
  *   <li>Overall system performance</li>
  * </ul>
  */
-@Component
-@ConditionalOnClass(name = "org.springframework.boot.actuate.health.HealthIndicator")
-@ConditionalOnBean(LoggingProperties.class)
 public class LoggingHealthIndicator implements HealthIndicator {
 
     private final LoggingProperties loggingProperties;

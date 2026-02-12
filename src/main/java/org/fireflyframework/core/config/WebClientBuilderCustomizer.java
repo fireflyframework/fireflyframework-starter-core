@@ -61,7 +61,7 @@ import java.util.function.Consumer;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "webclient.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "firefly.webclient.enabled", havingValue = "true", matchIfMissing = true)
 public class WebClientBuilderCustomizer {
 
     private final WebClientProperties properties;

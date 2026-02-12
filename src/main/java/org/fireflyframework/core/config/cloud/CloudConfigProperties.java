@@ -20,7 +20,6 @@ package org.fireflyframework.core.config.cloud;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Configuration properties for Spring Cloud Config.
@@ -31,8 +30,7 @@ import org.springframework.context.annotation.Configuration;
  * Properties can be configured in application.yml or application.properties using
  * the prefix "cloud.config".
  */
-@Configuration
-@ConfigurationProperties(prefix = "cloud.config")
+@ConfigurationProperties(prefix = "firefly.cloud.config")
 @Getter
 @Setter
 public class CloudConfigProperties {

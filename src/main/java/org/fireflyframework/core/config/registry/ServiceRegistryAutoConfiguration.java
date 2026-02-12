@@ -44,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
  * client dependency is present and the service.registry.enabled property is set to true.
  */
 @Configuration
-@ConditionalOnProperty(prefix = "service.registry", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "firefly.service.registry", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(ServiceRegistryProperties.class)
 @Slf4j
 public class ServiceRegistryAutoConfiguration {
@@ -63,7 +63,7 @@ public class ServiceRegistryAutoConfiguration {
      */
     @Configuration
     @ConditionalOnClass(name = "org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration")
-    @ConditionalOnProperty(prefix = "service.registry", name = "type", havingValue = "EUREKA", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "firefly.service.registry", name = "type", havingValue = "EUREKA", matchIfMissing = true)
     public static class EurekaClientConfiguration {
 
         private final ServiceRegistryProperties properties;
@@ -112,7 +112,7 @@ public class ServiceRegistryAutoConfiguration {
      */
     @Configuration
     @ConditionalOnClass(name = "org.springframework.cloud.consul.discovery.ConsulDiscoveryClientConfiguration")
-    @ConditionalOnProperty(prefix = "service.registry", name = "type", havingValue = "CONSUL")
+    @ConditionalOnProperty(prefix = "firefly.service.registry", name = "type", havingValue = "CONSUL")
     public static class ConsulClientConfiguration {
 
         private final ServiceRegistryProperties properties;
