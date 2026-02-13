@@ -21,6 +21,7 @@ import org.fireflyframework.eda.publisher.EventPublisherFactory;
 import org.fireflyframework.transactional.saga.events.StepEventPublisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +44,8 @@ public class StepEventsAutoConfiguration {
 
     @Bean
     @Primary
-    public StepEventPublisher stepEventPublisher(StepEventsProperties properties, 
+    @ConditionalOnMissingBean(StepEventPublisher.class)
+    public StepEventPublisher stepEventPublisher(StepEventsProperties properties,
                                                 EventPublisherFactory eventPublisherFactory) {
         log.info("Configuring StepEventPublisher bridge with publisher type: {}, connection: {}, topic: {}", 
                 properties.getPublisherType(), properties.getConnectionId(), properties.getDefaultTopic());
