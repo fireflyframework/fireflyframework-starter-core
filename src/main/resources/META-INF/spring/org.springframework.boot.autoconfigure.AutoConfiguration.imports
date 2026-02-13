@@ -1,7 +1,6 @@
 org.fireflyframework.core.config.FireflyBannerConfig
 org.fireflyframework.core.config.WebFluxConfig
 org.fireflyframework.core.config.WebClientConfig
-org.fireflyframework.core.config.WebClientProperties
 org.fireflyframework.core.config.WebClientBuilderCustomizer
 org.fireflyframework.core.config.WebFilterConfig
 org.fireflyframework.core.web.resilience.WebClientResilienceConfig
@@ -10,9 +9,7 @@ org.fireflyframework.core.actuator.config.ActuatorConfig
 org.fireflyframework.core.actuator.config.DefaultHealthConfig
 org.fireflyframework.core.actuator.config.DefaultInfoContributorConfig
 org.fireflyframework.core.actuator.config.TracingConfig
-org.fireflyframework.core.config.cloud.CloudConfigProperties
 org.fireflyframework.core.config.cloud.CloudConfigAutoConfiguration
-org.fireflyframework.core.config.registry.ServiceRegistryProperties
 org.fireflyframework.core.config.registry.ServiceRegistryAutoConfiguration
 org.fireflyframework.core.messaging.config.StepEventsAutoConfiguration
 org.fireflyframework.core.messaging.config.TransactionalEngineAutoConfiguration
