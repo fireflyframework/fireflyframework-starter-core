@@ -32,7 +32,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *   <li><strong>Bulkhead:</strong> Limits the number of concurrent calls to a service</li>
  * </ul>
  */
-@ConfigurationProperties(prefix = "webclient.resilience")
+@ConfigurationProperties(prefix = "firefly.webclient.resilience")
 @Getter
 @Setter
 public class WebClientResilienceProperties {

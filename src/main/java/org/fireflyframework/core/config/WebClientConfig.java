@@ -17,6 +17,7 @@
 
 package org.fireflyframework.core.config;
 
+import org.fireflyframework.core.web.client.WebClientTemplate;
 import org.fireflyframework.core.web.resilience.ResilientWebClient;
 import io.github.resilience4j.bulkhead.BulkheadRegistry;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
@@ -26,7 +27,9 @@ import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.ClientRequest;
@@ -65,7 +68,8 @@ import static org.fireflyframework.core.config.TransactionFilter.TRANSACTION_ID_
  */
 @Slf4j
 @Configuration
-@ConditionalOnProperty(name = "webclient.enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(name = "firefly.webclient.enabled", havingValue = "true", matchIfMissing = true)
+@EnableConfigurationProperties(WebClientProperties.class)
 public class WebClientConfig {
 
     private final CircuitBreakerRegistry circuitBreakerRegistry;
@@ -164,5 +168,11 @@ public class WebClientConfig {
         }
 
         return builder;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    WebClientTemplate webClientTemplate(WebClient webClient, WebClientProperties properties) {
+        return new WebClientTemplate(webClient, properties);
     }
 }

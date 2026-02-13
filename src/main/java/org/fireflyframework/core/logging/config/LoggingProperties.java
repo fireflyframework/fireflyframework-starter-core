@@ -18,7 +18,6 @@
 package org.fireflyframework.core.logging.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * Configuration properties for the enhanced structured logging system.
@@ -29,8 +28,7 @@ import org.springframework.stereotype.Component;
  * Properties can be configured in application.yml or application.properties using the
  * 'logging' prefix.
  */
-@Component
-@ConfigurationProperties(prefix = "logging")
+@ConfigurationProperties(prefix = "firefly.logging")
 public class LoggingProperties {
 
     /**

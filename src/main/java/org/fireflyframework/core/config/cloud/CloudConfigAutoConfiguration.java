@@ -46,7 +46,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Configuration
 @ConditionalOnClass(name = "org.springframework.cloud.config.client.ConfigServicePropertySourceLocator")
-@ConditionalOnProperty(prefix = "cloud.config", name = "enabled", havingValue = "true")
+@ConditionalOnProperty(prefix = "firefly.cloud.config", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(CloudConfigProperties.class)
 @Slf4j
 public class CloudConfigAutoConfiguration {
@@ -69,7 +69,7 @@ public class CloudConfigAutoConfiguration {
      */
     @Bean
     @ConditionalOnClass(name = "org.springframework.cloud.context.scope.refresh.RefreshScope")
-    @ConditionalOnProperty(prefix = "cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnMissingBean
     public RefreshScope refreshScope() {
         log.info("Creating refresh scope");
@@ -83,7 +83,7 @@ public class CloudConfigAutoConfiguration {
      */
     @Bean
     @ConditionalOnClass(name = "org.springframework.cloud.autoconfigure.RefreshAutoConfiguration$RefreshProperties")
-    @ConditionalOnProperty(prefix = "cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnMissingBean
     public RefreshProperties refreshProperties() {
         log.info("Creating refresh properties");
@@ -99,7 +99,7 @@ public class CloudConfigAutoConfiguration {
      */
     @Bean
     @ConditionalOnClass(name = "org.springframework.cloud.context.refresh.ContextRefresher")
-    @ConditionalOnProperty(prefix = "cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnMissingBean
     public ContextRefresher contextRefresher(RefreshScope refreshScope, RefreshProperties refreshProperties) {
         log.info("Creating context refresher");
@@ -114,7 +114,7 @@ public class CloudConfigAutoConfiguration {
      */
     @Bean
     @ConditionalOnClass(name = "org.springframework.cloud.endpoint.RefreshEndpoint")
-    @ConditionalOnProperty(prefix = "cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
     @ConditionalOnMissingBean
     public RefreshEndpoint refreshEndpoint(ContextRefresher contextRefresher) {
         log.info("Enabling configuration refresh endpoint");
@@ -129,7 +129,7 @@ public class CloudConfigAutoConfiguration {
      * @return the refresh event listener
      */
     @Bean
-    @ConditionalOnProperty(prefix = "cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
     public ApplicationListener<RefreshScopeRefreshedEvent> refreshEventListener() {
         return event -> log.info("Configuration refreshed: {}", event);
     }
