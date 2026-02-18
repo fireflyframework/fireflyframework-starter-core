@@ -25,9 +25,10 @@ import io.github.resilience4j.retry.RetryConfig;
 import io.github.resilience4j.retry.RetryRegistry;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import java.time.Duration;
@@ -46,13 +47,13 @@ import java.time.Duration;
  * The resilience patterns are implemented using the Resilience4j library, which provides
  * a comprehensive set of fault tolerance mechanisms for reactive applications.
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties(WebClientResilienceProperties.class)
-public class WebClientResilienceConfig {
+public class WebClientResilienceAutoConfiguration {
 
     private final WebClientResilienceProperties properties;
 
-    public WebClientResilienceConfig(WebClientResilienceProperties properties) {
+    public WebClientResilienceAutoConfiguration(WebClientResilienceProperties properties) {
         this.properties = properties;
     }
 
@@ -62,6 +63,7 @@ public class WebClientResilienceConfig {
      * @return the CircuitBreakerRegistry
      */
     @Bean
+    @ConditionalOnMissingBean
     public CircuitBreakerRegistry webClientCircuitBreakerRegistry() {
         CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
                 .failureRateThreshold(properties.getCircuitBreaker().getFailureRateThreshold())
@@ -80,6 +82,7 @@ public class WebClientResilienceConfig {
      */
     @Bean
     @Primary
+    @ConditionalOnMissingBean
     public RetryRegistry webClientRetryRegistry() {
         RetryConfig retryConfig = RetryConfig.custom()
                 .maxAttempts(properties.getRetry().getMaxAttempts())
@@ -96,6 +99,7 @@ public class WebClientResilienceConfig {
      * @return the TimeLimiterRegistry
      */
     @Bean
+    @ConditionalOnMissingBean
     public TimeLimiterRegistry webClientTimeLimiterRegistry() {
         TimeLimiterConfig timeLimiterConfig = TimeLimiterConfig.custom()
                 .timeoutDuration(Duration.ofMillis(properties.getTimeout().getTimeoutMs()))
@@ -110,6 +114,7 @@ public class WebClientResilienceConfig {
      * @return the BulkheadRegistry
      */
     @Bean
+    @ConditionalOnMissingBean
     public BulkheadRegistry webClientBulkheadRegistry() {
         BulkheadConfig bulkheadConfig = BulkheadConfig.custom()
                 .maxConcurrentCalls(properties.getBulkhead().getMaxConcurrentCalls())

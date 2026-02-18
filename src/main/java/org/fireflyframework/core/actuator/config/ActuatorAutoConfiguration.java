@@ -25,9 +25,9 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 /**
@@ -43,11 +43,11 @@ import org.springframework.core.env.Environment;
  * - Default actuator endpoint configuration
  * - Integration with the transaction ID mechanism for distributed tracing
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(name = "org.springframework.boot.actuate.autoconfigure.endpoint.EndpointAutoConfiguration")
 @EnableConfigurationProperties(ActuatorProperties.class)
 @AutoConfigureBefore(ManagementContextAutoConfiguration.class)
-public class ActuatorConfig {
+public class ActuatorAutoConfiguration {
 
     /**
      * Customizes the meter registry with application-specific tags.
@@ -58,11 +58,11 @@ public class ActuatorConfig {
     private final ActuatorProperties actuatorProperties;
 
     /**
-     * Constructor for ActuatorConfig.
+     * Constructor for ActuatorAutoConfiguration.
      *
      * @param actuatorProperties the actuator properties
      */
-    public ActuatorConfig(ActuatorProperties actuatorProperties) {
+    public ActuatorAutoConfiguration(ActuatorProperties actuatorProperties) {
         this.actuatorProperties = actuatorProperties;
     }
 
@@ -73,6 +73,7 @@ public class ActuatorConfig {
      * @return a customizer for the meter registry
      */
     @Bean
+    @ConditionalOnMissingBean
     public MeterRegistryCustomizer<MeterRegistry> metricsCommonTags(Environment environment) {
         return registry -> {
             String applicationName = environment.getProperty("spring.application.name", "application");

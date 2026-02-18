@@ -17,8 +17,8 @@
 
 package org.fireflyframework.core.actuator.config;
 
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 /**
@@ -29,9 +29,9 @@ import org.springframework.context.annotation.PropertySource;
  * the application-actuator-default.yml file which contains sensible defaults
  * for actuator endpoints, health checks, and metrics.
  */
-@Configuration
+@AutoConfiguration
 @PropertySource(value = "classpath:application-actuator-default.yml", factory = YamlPropertySourceFactory.class)
 @ConfigurationPropertiesScan("org.fireflyframework.core.actuator.config")
-public class ActuatorDefaultPropertiesConfig {
+public class ActuatorDefaultPropertiesAutoConfiguration {
     // This class only loads the default properties
 }

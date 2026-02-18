@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
@@ -59,7 +59,7 @@ import java.util.function.Consumer;
  * The configurations are applied based on the properties defined in {@link WebClientProperties}.
  */
 @Slf4j
-@Component
+@AutoConfiguration
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "firefly.webclient.enabled", havingValue = "true", matchIfMissing = true)
 public class WebClientBuilderCustomizer {

@@ -20,6 +20,7 @@ package org.fireflyframework.core.config;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -52,6 +53,7 @@ import java.util.Map;
  * - `@Getter`, `@Setter`: Lombok annotations to automatically generate
  *   getter and setter methods for the fields.
  */
+@Validated
 @ConfigurationProperties(prefix = "firefly.webclient")
 @Getter
 @Setter

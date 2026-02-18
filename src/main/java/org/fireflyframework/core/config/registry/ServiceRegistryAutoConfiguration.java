@@ -77,6 +77,7 @@ public class ServiceRegistryAutoConfiguration {
          * Sets system properties for Eureka client configuration.
          * This is done to avoid having to create a separate eureka.client.* configuration.
          */
+        @ConditionalOnMissingBean
         @Bean
         public void configureEurekaClient() {
             // Set system properties for Eureka client
@@ -127,6 +128,7 @@ public class ServiceRegistryAutoConfiguration {
          * Sets system properties for Consul client configuration.
          * This is done to avoid having to create a separate consul.* configuration.
          */
+        @ConditionalOnMissingBean
         @Bean
         public void configureConsulClient() {
             // Set system properties for Consul client

@@ -20,6 +20,7 @@ package org.fireflyframework.core.actuator.config;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +34,8 @@ import java.util.Map;
  * behavior in the application. It allows for fine-grained control over which endpoints
  * are enabled and exposed, as well as configuration for health checks and metrics.
  */
-@ConfigurationProperties(prefix = "management")
+@Validated
+@ConfigurationProperties(prefix = "firefly.actuator")
 @Getter
 @Setter
 public class ActuatorProperties {

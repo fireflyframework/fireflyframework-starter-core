@@ -28,9 +28,9 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.util.unit.DataSize;
 
 import java.io.File;
@@ -42,20 +42,20 @@ import java.io.File;
  * registered when the actuator dependency is present. It ensures that basic
  * health checks are available without requiring additional configuration.
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(HealthEndpoint.class)
 @AutoConfigureBefore(HealthEndpointAutoConfiguration.class)
 @AutoConfigureAfter(HealthContributorAutoConfiguration.class)
-public class DefaultHealthConfig {
+public class DefaultHealthAutoConfiguration {
 
     private final ActuatorProperties actuatorProperties;
 
     /**
-     * Constructor for DefaultHealthConfig.
+     * Constructor for DefaultHealthAutoConfiguration.
      *
      * @param actuatorProperties the actuator properties
      */
-    public DefaultHealthConfig(ActuatorProperties actuatorProperties) {
+    public DefaultHealthAutoConfiguration(ActuatorProperties actuatorProperties) {
         this.actuatorProperties = actuatorProperties;
     }
 

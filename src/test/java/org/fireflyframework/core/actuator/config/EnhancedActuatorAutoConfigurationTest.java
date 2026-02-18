@@ -42,12 +42,12 @@ import static org.mockito.Mockito.when;
  * Integration test for the enhanced actuator configurations.
  * Tests that all new actuator configurations load correctly and provide expected functionality.
  */
-class EnhancedActuatorConfigTest {
+class EnhancedActuatorAutoConfigurationTest {
 
     private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
             .withUserConfiguration(TestConfig.class)
             .withUserConfiguration(
-                    ActuatorConfig.class,
+                    ActuatorAutoConfiguration.class,
                     JvmMetricsConfig.class,
                     DatabaseHealthConfig.class,
                     ThreadPoolMetricsConfig.class,
@@ -59,7 +59,7 @@ class EnhancedActuatorConfigTest {
     @Test
     void shouldLoadJvmMetricsConfig() {
         contextRunner
-                .withPropertyValues("management.metrics.jvm.enabled=true")
+                .withPropertyValues("firefly.actuator.metrics.jvm.enabled=true")
                 .run(context -> {
                     assertThat(context).hasSingleBean(JvmMetricsConfig.class);
                     
@@ -76,7 +76,7 @@ class EnhancedActuatorConfigTest {
     @Test
     void shouldLoadDatabaseHealthConfig() {
         contextRunner
-                .withPropertyValues("management.health.database.enabled=true")
+                .withPropertyValues("firefly.actuator.health.database.enabled=true")
                 .run(context -> {
                     assertThat(context).hasSingleBean(DatabaseHealthConfig.class);
                     
@@ -93,7 +93,7 @@ class EnhancedActuatorConfigTest {
     @Test
     void shouldLoadThreadPoolMetricsConfig() {
         contextRunner
-                .withPropertyValues("management.metrics.threadpool.enabled=true")
+                .withPropertyValues("firefly.actuator.metrics.threadpool.enabled=true")
                 .run(context -> {
                     assertThat(context).hasSingleBean(ThreadPoolMetricsConfig.class);
                     
@@ -110,7 +110,7 @@ class EnhancedActuatorConfigTest {
     @Test
     void shouldLoadHttpClientMetricsConfig() {
         contextRunner
-                .withPropertyValues("management.metrics.http.client.enabled=true")
+                .withPropertyValues("firefly.actuator.metrics.http.client.enabled=true")
                 .run(context -> {
                     assertThat(context).hasSingleBean(HttpClientMetricsConfig.class);
                     
@@ -129,7 +129,7 @@ class EnhancedActuatorConfigTest {
     @Test
     void shouldLoadCacheHealthConfig() {
         contextRunner
-                .withPropertyValues("management.health.cache.enabled=true")
+                .withPropertyValues("firefly.actuator.health.cache.enabled=true")
                 .run(context -> {
                     assertThat(context).hasSingleBean(CacheHealthConfig.class);
                     
@@ -146,7 +146,7 @@ class EnhancedActuatorConfigTest {
     @Test
     void shouldLoadApplicationMetricsConfig() {
         contextRunner
-                .withPropertyValues("management.metrics.application.enabled=true")
+                .withPropertyValues("firefly.actuator.metrics.application.enabled=true")
                 .run(context -> {
                     assertThat(context).hasSingleBean(ApplicationMetricsConfig.class);
                     
@@ -162,13 +162,13 @@ class EnhancedActuatorConfigTest {
     void shouldLoadActuatorPropertiesCorrectly() {
         contextRunner
                 .withPropertyValues(
-                        "management.endpoints.web.exposure=*",
-                        "management.metrics.jvm.enabled=true",
-                        "management.health.database.enabled=true",
-                        "management.metrics.threadpool.enabled=true",
-                        "management.metrics.http.client.enabled=true",
-                        "management.health.cache.enabled=true",
-                        "management.metrics.application.enabled=true"
+                        "firefly.actuator.endpoints.web.exposure=*",
+                        "firefly.actuator.metrics.jvm.enabled=true",
+                        "firefly.actuator.health.database.enabled=true",
+                        "firefly.actuator.metrics.threadpool.enabled=true",
+                        "firefly.actuator.metrics.http.client.enabled=true",
+                        "firefly.actuator.health.cache.enabled=true",
+                        "firefly.actuator.metrics.application.enabled=true"
                 )
                 .run(context -> {
                     assertThat(context).hasSingleBean(ActuatorProperties.class);
@@ -189,12 +189,12 @@ class EnhancedActuatorConfigTest {
     void shouldDisableConfigurationsWhenPropertiesSetToFalse() {
         contextRunner
                 .withPropertyValues(
-                        "management.metrics.jvm.enabled=false",
-                        "management.health.database.enabled=false",
-                        "management.metrics.threadpool.enabled=false",
-                        "management.metrics.http.client.enabled=false",
-                        "management.health.cache.enabled=false",
-                        "management.metrics.application.enabled=false"
+                        "firefly.actuator.metrics.jvm.enabled=false",
+                        "firefly.actuator.health.database.enabled=false",
+                        "firefly.actuator.metrics.threadpool.enabled=false",
+                        "firefly.actuator.metrics.http.client.enabled=false",
+                        "firefly.actuator.health.cache.enabled=false",
+                        "firefly.actuator.metrics.application.enabled=false"
                 )
                 .run(context -> {
                     // Verify configurations are not loaded when disabled

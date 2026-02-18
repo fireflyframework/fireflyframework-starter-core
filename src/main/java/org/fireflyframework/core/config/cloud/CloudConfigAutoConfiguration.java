@@ -29,8 +29,8 @@ import org.springframework.cloud.endpoint.RefreshEndpoint;
 import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration.RefreshProperties;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
  * The configuration is automatically enabled when the Spring Cloud Config client
  * dependency is present and the cloud.config.enabled property is set to true.
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(name = "org.springframework.cloud.config.client.ConfigServicePropertySourceLocator")
 @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "enabled", havingValue = "true")
 @EnableConfigurationProperties(CloudConfigProperties.class)
@@ -129,6 +129,7 @@ public class CloudConfigAutoConfiguration {
      * @return the refresh event listener
      */
     @Bean
+    @ConditionalOnMissingBean
     @ConditionalOnProperty(prefix = "firefly.cloud.config", name = "refresh-enabled", havingValue = "true", matchIfMissing = true)
     public ApplicationListener<RefreshScopeRefreshedEvent> refreshEventListener() {
         return event -> log.info("Configuration refreshed: {}", event);

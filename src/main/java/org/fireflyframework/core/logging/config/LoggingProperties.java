@@ -18,6 +18,7 @@
 package org.fireflyframework.core.logging.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * Configuration properties for the enhanced structured logging system.
@@ -28,6 +29,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Properties can be configured in application.yml or application.properties using the
  * 'logging' prefix.
  */
+@Validated
 @ConfigurationProperties(prefix = "firefly.logging")
 public class LoggingProperties {
 

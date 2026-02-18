@@ -250,28 +250,19 @@ Reactive web framework setup:
 
 ```java
 @Configuration
-@EnableWebFlux
 public class WebFluxConfig implements WebFluxConfigurer {
-    
+
     @Override
     public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
-        // Configure JSON message codecs
+        // Configure JSON message codecs with JavaTimeModule
         configurer.defaultCodecs().jackson2JsonEncoder(jsonEncoder());
         configurer.defaultCodecs().jackson2JsonDecoder(jsonDecoder());
-        
-        // Set max in-memory size for requests
-        configurer.defaultCodecs().maxInMemorySize(1024 * 1024); // 1MB
-    }
-    
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-            .allowedOrigins("*")
-            .allowedMethods("GET", "POST", "PUT", "DELETE")
-            .allowedHeaders("*");
     }
 }
 ```
+
+> **Note:** CORS configuration is provided by `fireflyframework-web` via `firefly.web.cors.*` properties.
+> See the [fireflyframework-web](https://github.com/fireflyframework/fireflyframework-web) module.
 
 ### WebClient Configuration
 Enhanced HTTP client with customization:

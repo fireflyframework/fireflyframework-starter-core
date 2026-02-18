@@ -22,9 +22,9 @@ import org.springframework.boot.actuate.info.InfoContributor;
 import org.springframework.boot.actuate.info.InfoEndpoint;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import java.util.HashMap;
@@ -38,10 +38,10 @@ import java.util.Map;
  * application information is available through the info endpoint without
  * requiring additional configuration.
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(InfoEndpoint.class)
 @AutoConfigureAfter(InfoContributorAutoConfiguration.class)
-public class DefaultInfoContributorConfig {
+public class DefaultInfoContributorAutoConfiguration {
 
     /**
      * Provides a default application info contributor if none is configured.

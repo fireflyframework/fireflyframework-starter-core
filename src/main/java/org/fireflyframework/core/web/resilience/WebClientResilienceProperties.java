@@ -20,6 +20,7 @@ package org.fireflyframework.core.web.resilience;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * Configuration properties for WebClient resilience patterns.
@@ -32,6 +33,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *   <li><strong>Bulkhead:</strong> Limits the number of concurrent calls to a service</li>
  * </ul>
  */
+@Validated
 @ConfigurationProperties(prefix = "firefly.webclient.resilience")
 @Getter
 @Setter

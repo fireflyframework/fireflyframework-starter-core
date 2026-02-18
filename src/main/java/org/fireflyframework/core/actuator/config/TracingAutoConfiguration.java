@@ -27,9 +27,10 @@ import brave.propagation.Propagation;
 import brave.propagation.ThreadLocalCurrentTraceContext;
 import brave.sampler.Sampler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import static org.fireflyframework.core.config.TransactionFilter.TRANSACTION_ID_HEADER;
 
@@ -46,10 +47,10 @@ import static org.fireflyframework.core.config.TransactionFilter.TRANSACTION_ID_
  * - Sampling configuration
  * - MDC integration for logging
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(name = {"io.micrometer.tracing.Tracer", "brave.Tracing"})
 @ConditionalOnProperty(prefix = "management.tracing", name = "enabled", havingValue = "true", matchIfMissing = true)
-public class TracingConfig {
+public class TracingAutoConfiguration {
 
     /**
      * Configures the transaction ID field for baggage propagation.
@@ -57,6 +58,7 @@ public class TracingConfig {
      * @return the transaction ID baggage field
      */
     @Bean
+    @ConditionalOnMissingBean
     public BaggageField transactionIdField() {
         return BaggageField.create(TRANSACTION_ID_HEADER);
     }
@@ -78,6 +80,7 @@ public class TracingConfig {
      * @return the propagation factory
      */
     @Bean
+    @ConditionalOnMissingBean
     public Propagation.Factory fireflyPropagationFactory(BaggageField transactionIdField) {
         return BaggagePropagation.newFactoryBuilder(B3Propagation.FACTORY)
                 .add(BaggagePropagationConfig.SingleBaggageField.newBuilder(transactionIdField)
@@ -93,6 +96,7 @@ public class TracingConfig {
      * @return the current trace context
      */
     @Bean
+    @ConditionalOnMissingBean
     public ThreadLocalCurrentTraceContext currentTraceContext(BaggageField transactionIdField) {
         return ThreadLocalCurrentTraceContext.newBuilder()
                 .addScopeDecorator(MDCScopeDecorator.newBuilder()
@@ -110,6 +114,7 @@ public class TracingConfig {
      * @return the sampler
      */
     @Bean
+    @ConditionalOnMissingBean
     public Sampler sampler(ActuatorProperties actuatorProperties) {
         return Sampler.create((float)actuatorProperties.getTracing().getSampling().getProbability());
     }

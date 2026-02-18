@@ -20,6 +20,7 @@ package org.fireflyframework.core.config.registry;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * Configuration properties for service registry.
@@ -31,6 +32,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * Properties can be configured in application.yml or application.properties using
  * the prefix "service.registry".
  */
+@Validated
 @ConfigurationProperties(prefix = "firefly.service.registry")
 @Getter
 @Setter

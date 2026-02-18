@@ -1,11 +1,11 @@
-# Firefly Framework - Core
+# Firefly Framework - Starter Core
 
-[![CI](https://github.com/fireflyframework/fireflyframework-core/actions/workflows/ci.yml/badge.svg)](https://github.com/fireflyframework/fireflyframework-core/actions/workflows/ci.yml)
+[![CI](https://github.com/fireflyframework/fireflyframework-starter-core/actions/workflows/ci.yml/badge.svg)](https://github.com/fireflyframework/fireflyframework-starter-core/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-21%2B-orange.svg)](https://openjdk.org)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-green.svg)](https://spring.io/projects/spring-boot)
 
-> Core framework module providing WebFlux configuration, actuator setup, resilience, tracing, and service registry integration.
+> Opinionated starter for core/infrastructure-layer microservices providing WebClient utilities, service discovery, messaging bridges, actuator enhancements, and resilience patterns.
 
 ---
 
@@ -23,11 +23,11 @@
 
 ## Overview
 
-Firefly Framework Core is the foundational runtime module that every Firefly-based microservice includes. It provides auto-configured WebFlux settings, WebClient configuration with resilience patterns, Actuator health and metrics endpoints, distributed tracing, and service registry integration.
+Firefly Framework Starter Core is an opinionated starter module for building core/infrastructure-layer microservices within the Firefly Framework ecosystem. This is NOT the core of the framework itself — rather, it's a convenience starter that bundles together essential infrastructure components for building robust, production-ready microservices at the infrastructure tier.
 
-The module handles cross-cutting concerns including banner display, web filters, transaction context propagation, cloud configuration, and step event publishing for the transactional engine. It integrates with Spring Cloud Config for centralized configuration and supports service discovery through configurable registry adapters.
+The starter provides auto-configured WebFlux settings, resilient WebClient configuration, service registry integration, messaging bridges for event-driven architectures, enhanced Actuator endpoints, distributed tracing, and step event publishing for saga orchestration. It handles cross-cutting infrastructure concerns including banner display, web filters, transaction context propagation, cloud configuration client setup, and observability hooks.
 
-Core is designed to be included as a transitive dependency through higher-level modules like `fireflyframework-domain` or `fireflyframework-application`, but can also be used directly for custom microservice setups.
+This starter is designed to accelerate the development of infrastructure-layer microservices (config servers, API gateways, service registries, messaging bridges, and other platform services) by providing battle-tested defaults and integrations out of the box. For domain-layer concerns, use `fireflyframework-domain` or `fireflyframework-application`.
 
 ## Features
 
@@ -56,7 +56,7 @@ Core is designed to be included as a transitive dependency through higher-level 
 ```xml
 <dependency>
     <groupId>org.fireflyframework</groupId>
-    <artifactId>fireflyframework-core</artifactId>
+    <artifactId>fireflyframework-starter-core</artifactId>
     <version>26.02.04</version>
 </dependency>
 ```

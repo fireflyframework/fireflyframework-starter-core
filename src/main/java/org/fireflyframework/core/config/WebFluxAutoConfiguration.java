@@ -21,12 +21,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
-import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 /**
@@ -43,8 +42,8 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
  * - Disabling the serialization of dates as timestamps by configuring the Jackson {@link ObjectMapper}.
  * - Setting the default media type for JSON encoding and decoding to `application/json`.
  */
-@Configuration
-public class WebFluxConfig implements WebFluxConfigurer {
+@AutoConfiguration
+public class WebFluxAutoConfiguration implements WebFluxConfigurer {
 
     @Override
     public void configureHttpMessageCodecs(ServerCodecConfigurer configurer) {
@@ -58,14 +57,5 @@ public class WebFluxConfig implements WebFluxConfigurer {
 
         configurer.defaultCodecs().jackson2JsonDecoder(
                 new Jackson2JsonDecoder(objectMapper, MediaType.APPLICATION_JSON));
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("*")
-                .exposedHeaders("X-Transaction-Id")
-                .allowedHeaders("*");
     }
 }

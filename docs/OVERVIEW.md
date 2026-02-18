@@ -18,7 +18,7 @@ Firefly Framework
 │   ├── Domain Models & Entities
 │   ├── Business Logic & Rules
 │   └── Domain Events
-└── Infrastructure Layer (fireflyframework-core) ← This Library
+└── Infrastructure Layer (fireflyframework-starter-core) ← This Library
     ├── Messaging Abstraction
     ├── Configuration Management  
     ├── WebClient Enhancements

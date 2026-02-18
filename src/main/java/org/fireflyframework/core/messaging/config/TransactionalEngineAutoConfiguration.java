@@ -19,8 +19,8 @@ package org.fireflyframework.core.messaging.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Auto-configuration for lib-transactional-engine integration with fireflyframework-core.
@@ -28,7 +28,7 @@ import org.springframework.context.annotation.Configuration;
  * This configuration enables saga and step events functionality by scanning for
  * transactional engine components and enabling their auto-configuration.
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnClass(name = {
     "org.fireflyframework.transactional.annotations.Saga",
     "org.fireflyframework.transactional.events.StepEventPublisher"

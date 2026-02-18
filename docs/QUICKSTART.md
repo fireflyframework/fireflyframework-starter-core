@@ -22,7 +22,7 @@ Add to your `pom.xml`:
 ```xml
 <dependency>
     <groupId>org.fireflyframework</groupId>
-    <artifactId>fireflyframework-core</artifactId>
+    <artifactId>fireflyframework-starter-core</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 
@@ -38,7 +38,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```gradle
-implementation 'org.fireflyframework:fireflyframework-core:1.0.0-SNAPSHOT'
+implementation 'org.fireflyframework:fireflyframework-starter-core:1.0.0-SNAPSHOT'
 
 // Optional: Add specific messaging providers
 implementation 'org.springframework.kafka:spring-kafka'

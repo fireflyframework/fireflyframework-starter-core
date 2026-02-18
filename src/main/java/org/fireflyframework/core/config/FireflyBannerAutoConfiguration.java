@@ -20,6 +20,7 @@ package org.fireflyframework.core.config;
 import org.springframework.boot.Banner;
 import org.springframework.boot.ResourceBanner;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.event.ApplicationStartingEvent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -46,9 +47,9 @@ import java.io.PrintStream;
  * classpath:/static/custom-banner.txt but can be overridden by applications.
  */
 @AutoConfiguration
-@EnableConfigurationProperties(FireflyBannerConfig.BannerProperties.class)
+@EnableConfigurationProperties(FireflyBannerAutoConfiguration.BannerProperties.class)
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class FireflyBannerConfig implements ApplicationListener<ApplicationStartingEvent> {
+public class FireflyBannerAutoConfiguration implements ApplicationListener<ApplicationStartingEvent> {
 
     /**
      * Bean definition for the custom Firefly banner.
@@ -56,6 +57,7 @@ public class FireflyBannerConfig implements ApplicationListener<ApplicationStart
      */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
+    @ConditionalOnMissingBean
     public Banner fireflyBanner() {
         return new FireflyBanner();
     }

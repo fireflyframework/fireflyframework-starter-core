@@ -25,13 +25,14 @@ import io.github.resilience4j.retry.RetryRegistry;
 import io.github.resilience4j.timelimiter.TimeLimiterRegistry;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -67,10 +68,10 @@ import static org.fireflyframework.core.config.TransactionFilter.TRANSACTION_ID_
  *   `webclient.enabled` property.
  */
 @Slf4j
-@Configuration
+@AutoConfiguration
 @ConditionalOnProperty(name = "firefly.webclient.enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(WebClientProperties.class)
-public class WebClientConfig {
+public class WebClientAutoConfiguration {
 
     private final CircuitBreakerRegistry circuitBreakerRegistry;
     private final RetryRegistry retryRegistry;
@@ -79,7 +80,7 @@ public class WebClientConfig {
     private final ObjectProvider<MeterRegistry> meterRegistryProvider;
     private final WebClientBuilderCustomizer webClientBuilderCustomizer;
 
-    public WebClientConfig(
+    public WebClientAutoConfiguration(
             CircuitBreakerRegistry circuitBreakerRegistry,
             @Qualifier("webClientRetryRegistry") RetryRegistry retryRegistry,
             TimeLimiterRegistry timeLimiterRegistry,
@@ -101,6 +102,7 @@ public class WebClientConfig {
      * @return the WebClient bean
      */
     @Bean
+    @ConditionalOnMissingBean
     WebClient webClient() {
         // Create a WebClient.Builder with transaction ID propagation
         WebClient.Builder builder = WebClient.builder()
@@ -145,6 +147,7 @@ public class WebClientConfig {
      * @return the WebClient.Builder bean
      */
     @Bean
+    @ConditionalOnMissingBean
     WebClient.Builder webClientBuilder() {
         // Create a WebClient.Builder with transaction ID propagation
         WebClient.Builder builder = WebClient.builder()
