@@ -54,7 +54,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 @Configuration
 @ConditionalOnClass(MeterRegistry.class)
-@ConditionalOnProperty(prefix = "management.metrics.application", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "firefly.actuator.metrics.application", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(MetricsAutoConfiguration.class)
 public class ApplicationMetricsConfig {
 

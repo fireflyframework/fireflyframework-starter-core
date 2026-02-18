@@ -50,7 +50,7 @@ import java.util.Map;
  */
 @Configuration
 @ConditionalOnClass(RestTemplate.class)
-@ConditionalOnProperty(prefix = "management.metrics.http.client", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "firefly.actuator.metrics.http.client", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(MetricsAutoConfiguration.class)
 public class HttpClientMetricsConfig {
 

@@ -47,7 +47,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass(MeterRegistry.class)
 @ConditionalOnBean(MeterRegistry.class)
-@ConditionalOnProperty(prefix = "management.metrics.jvm", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "firefly.actuator.metrics.jvm", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(MetricsAutoConfiguration.class)
 public class JvmMetricsConfig {
 

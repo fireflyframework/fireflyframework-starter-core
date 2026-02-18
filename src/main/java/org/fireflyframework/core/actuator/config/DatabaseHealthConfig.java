@@ -41,7 +41,7 @@ import java.util.Map;
  */
 @Configuration
 @ConditionalOnClass(DataSource.class)
-@ConditionalOnProperty(prefix = "management.health.database", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "firefly.actuator.health.database", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter({DataSourceAutoConfiguration.class, HealthContributorAutoConfiguration.class})
 public class DatabaseHealthConfig {
 

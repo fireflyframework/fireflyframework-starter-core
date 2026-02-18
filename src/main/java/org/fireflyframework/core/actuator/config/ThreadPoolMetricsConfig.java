@@ -50,7 +50,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Configuration
 @ConditionalOnClass(MeterRegistry.class)
-@ConditionalOnProperty(prefix = "management.metrics.threadpool", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "firefly.actuator.metrics.threadpool", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(MetricsAutoConfiguration.class)
 public class ThreadPoolMetricsConfig {
 

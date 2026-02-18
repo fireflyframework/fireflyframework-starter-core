@@ -46,7 +46,7 @@ import java.util.Map;
  */
 @Configuration
 @ConditionalOnClass(CacheManager.class)
-@ConditionalOnProperty(prefix = "management.health.cache", name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "firefly.actuator.health.cache", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(HealthContributorAutoConfiguration.class)
 public class CacheHealthConfig {
 
