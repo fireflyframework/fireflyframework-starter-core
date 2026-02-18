@@ -204,8 +204,6 @@
             <artifactId>resilience4j-reactor</artifactId>
         </dependency>
 
-        <!-- Micrometer / Tracing (provided transitively by fireflyframework-observability) -->
-        
         <!-- Additional Micrometer integrations -->
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
