@@ -1,5 +1,5 @@
-# Firefly Common Core Library - Step Events Integration Sample Configuration
-# This file demonstrates all available configuration options for integrating lib-transactional-engine
+# Firefly Common Core Library - Orchestration Integration Sample Configuration
+# This file demonstrates all available configuration options for integrating fireflyframework-orchestration
 # with fireflyframework-core messaging infrastructure
 
 spring:
@@ -171,7 +171,7 @@ firefly:
 logging:
   level:
     org.fireflyframework: DEBUG
-    org.fireflyframework.transactional: DEBUG
+    org.fireflyframework.orchestration: DEBUG
     org.fireflyframework.core.messaging: DEBUG
     org.springframework: WARN
     reactor: WARN

@@ -11,4 +11,4 @@ org.fireflyframework.core.actuator.config.DefaultInfoContributorAutoConfiguratio
 org.fireflyframework.core.actuator.config.TracingAutoConfiguration
 org.fireflyframework.core.config.cloud.CloudConfigAutoConfiguration
 org.fireflyframework.core.config.registry.ServiceRegistryAutoConfiguration
-org.fireflyframework.core.messaging.config.TransactionalEngineAutoConfiguration
+org.fireflyframework.core.messaging.config.OrchestrationAutoConfiguration

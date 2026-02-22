@@ -18,29 +18,27 @@ package org.fireflyframework.core.messaging.integration;
 
 import org.fireflyframework.cqrs.command.CommandBus;
 import org.fireflyframework.cqrs.query.QueryBus;
-import org.fireflyframework.transactional.saga.annotations.FromStep;
-import org.fireflyframework.transactional.saga.annotations.Saga;
-import org.fireflyframework.transactional.saga.annotations.SagaStep;
-import org.fireflyframework.transactional.shared.annotations.EnableTransactionalEngine;
-import org.fireflyframework.transactional.shared.annotations.Input;
+import org.fireflyframework.orchestration.core.argument.FromStep;
+import org.fireflyframework.orchestration.core.argument.Input;
+import org.fireflyframework.orchestration.saga.annotation.Saga;
+import org.fireflyframework.orchestration.saga.annotation.SagaStep;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
 
 /**
- * Customer Registration Saga demonstrating CQRS + lib-transactional-engine integration with fireflyframework-core.
+ * Customer Registration Saga demonstrating CQRS + orchestration engine integration with fireflyframework-core.
  * This saga orchestrates a complex customer onboarding process using CQRS commands and queries
  * within saga steps, with automatic compensation on failures.
- * 
+ *
  * The saga demonstrates the integration of:
- * - lib-transactional-engine for saga orchestration
+ * - fireflyframework-orchestration for saga orchestration
  * - fireflyframework-cqrs for CQRS commands and queries
- * - fireflyframework-core messaging for step events publishing
+ * - fireflyframework-core messaging for event publishing
  */
 @Component
 @Saga(name = "customer-registration")
-@EnableTransactionalEngine
 public class CustomerRegistrationSagaTest {
 
     private final CommandBus commandBus;

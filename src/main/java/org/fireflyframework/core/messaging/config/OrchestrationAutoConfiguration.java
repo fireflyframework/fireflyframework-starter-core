@@ -20,27 +20,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
- * Auto-configuration for lib-transactional-engine integration with fireflyframework-core.
- * 
- * This configuration enables saga and step events functionality by scanning for
- * transactional engine components and enabling their auto-configuration.
+ * Auto-configuration for orchestration engine integration with fireflyframework-core.
+ *
+ * This configuration activates when the orchestration engine is on the classpath,
+ * enabling saga, TCC, and workflow support for core microservices.
  */
 @AutoConfiguration
 @ConditionalOnClass(name = {
-    "org.fireflyframework.transactional.annotations.Saga",
-    "org.fireflyframework.transactional.events.StepEventPublisher"
+    "org.fireflyframework.orchestration.saga.annotation.Saga",
+    "org.fireflyframework.orchestration.core.event.OrchestrationEventPublisher"
 })
-@ConditionalOnProperty(prefix = "firefly.stepevents", name = "enabled", havingValue = "true", matchIfMissing = true)
-@ComponentScan(basePackages = {
-    "org.fireflyframework.transactional"
-})
+@ConditionalOnProperty(prefix = "firefly.orchestration", name = "enabled", havingValue = "true", matchIfMissing = true)
 @Slf4j
-public class TransactionalEngineAutoConfiguration {
-    
-    public TransactionalEngineAutoConfiguration() {
-        log.info("Enabling lib-transactional-engine integration with fireflyframework-core");
+public class OrchestrationAutoConfiguration {
+
+    public OrchestrationAutoConfiguration() {
+        log.info("Enabling orchestration engine integration with fireflyframework-core");
     }
 }
