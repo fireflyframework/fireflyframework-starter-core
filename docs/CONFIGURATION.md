@@ -14,7 +14,7 @@ This document provides a complete reference of all configuration options availab
 - [WebClient Configuration](#webclient-configuration)
 - [Actuator Configuration](#actuator-configuration)
 - [Step Events Configuration](#step-events-configuration)
-- [Transactional Engine Configuration](#transactional-engine-configuration)
+- [Orchestration Engine Configuration](#orchestration-engine-configuration)
 - [Environment-Specific Configuration](#environment-specific-configuration)
 - [Security Configuration](#security-configuration)
 - [Configuration Validation](#configuration-validation)
@@ -668,32 +668,30 @@ step-events:
     environment: ${spring.profiles.active:default}
 ```
 
-## Transactional Engine Configuration
+## Orchestration Engine Configuration
+
+The orchestration engine (`fireflyframework-orchestration`) is the consolidated replacement for the
+archived `lib-transactional-engine`. It provides Saga, TCC, and Workflow patterns with its own
+auto-configuration. When present on the classpath, `OrchestrationAutoConfiguration` is activated
+automatically.
 
 ```yaml
-transactional-engine:
-  # Enable transactional engine integration
-  enabled: true                   # Default: false
-  
-  # Step event publisher bean name
-  step-event-publisher: stepEventPublisherBridge  # Default
-  
-  # Saga execution configuration
-  execution:
-    thread-pool-size: 10          # Default: 10
-    max-retry-attempts: 3         # Default: 3
-    retry-delay-ms: 1000          # Default: 1000
-  
-  # Persistence configuration
-  persistence:
-    enabled: true                 # Default: true
-    provider: JPA                 # Options: JPA, REDIS, MONGODB
-    
-  # Monitoring configuration
-  monitoring:
-    enabled: true                 # Default: true
-    metrics-enabled: true         # Default: true
-    health-check-enabled: true    # Default: true
+firefly:
+  orchestration:
+    # Enable orchestration engine
+    enabled: true                   # Default: true (when on classpath)
+
+    # Saga pattern configuration
+    saga:
+      default-timeout: 30s         # Default: 30s
+
+    # TCC (Try-Confirm/Cancel) pattern configuration
+    tcc:
+      default-timeout: 30s         # Default: 30s
+
+    # Workflow pattern configuration
+    workflow:
+      default-timeout: 60s         # Default: 60s
 ```
 
 ## Environment-Specific Configuration

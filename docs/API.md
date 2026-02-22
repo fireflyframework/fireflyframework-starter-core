@@ -13,7 +13,7 @@ This document provides comprehensive API reference for all Firefly Common Core c
 - [Service Discovery API](#service-discovery-api)
 - [WebClient API](#webclient-api)
 - [Actuator API](#actuator-api)
-- [Step Events API](#step-events-api)
+- [Orchestration Integration](#orchestration-integration)
 - [Serialization API](#serialization-api)
 - [Health API](#health-api)
 - [Metrics API](#metrics-api)
@@ -672,113 +672,47 @@ public class DatabaseHealthIndicator implements HealthIndicator {
 }
 ```
 
-## Step Events API
+## Orchestration Integration
 
-### StepEventPublisherBridge
+The orchestration engine (`fireflyframework-orchestration`) is the consolidated module that provides
+Saga, TCC, and Workflow orchestration patterns. It includes its own auto-configuration and event
+publishing via `OrchestrationEventPublisher` and `EventGateway`. No starter-level bridge is needed.
+
+When `fireflyframework-orchestration` is present on the classpath, the `OrchestrationAutoConfiguration`
+automatically configures the orchestration engine, including event publishing, persistence, and
+monitoring. The orchestration engine manages its own event lifecycle internally.
+
+### OrchestrationEventPublisher
 
 ```java
-package org.fireflyframework.core.messaging.stepevents;
+package org.fireflyframework.orchestration.event;
 
-@Component
-@ConditionalOnProperty(prefix = "step-events", name = "enabled", havingValue = "true")
-public class StepEventPublisherBridge implements StepEventPublisher {
-    
-    private final EventPublisher eventPublisher;
-    private final StepEventsProperties stepEventsProperties;
-    
-    /**
-     * Publishes a step event to the configured messaging system.
-     * 
-     * @param event the step event to publish
-     * @return a Mono that completes when the event is published
-     */
-    @Override
-    public Mono<Void> publishStepEvent(StepEvent event) {
-        return eventPublisher.publish(
-            stepEventsProperties.getEventDestination(),
-            buildEventType(event),
-            buildEventPayload(event),
-            event.getTransactionId()
-        );
-    }
-    
-    /**
-     * Publishes multiple step events as a batch.
-     * 
-     * @param events the step events to publish
-     * @return a Mono that completes when all events are published
-     */
-    @Override
-    public Mono<Void> publishStepEvents(List<StepEvent> events) {
-        return Flux.fromIterable(events)
-            .flatMap(this::publishStepEvent)
-            .then();
-    }
-    
-    private String buildEventType(StepEvent event) {
-        return stepEventsProperties.getEventTypePrefix() + "." + event.getStepId() + "." + event.getStatus();
-    }
-    
-    private Map<String, Object> buildEventPayload(StepEvent event) {
-        Map<String, Object> payload = new HashMap<>();
-        payload.put("sagaId", event.getSagaId());
-        payload.put("stepId", event.getStepId());
-        payload.put("status", event.getStatus());
-        payload.put("timestamp", event.getTimestamp());
-        
-        if (stepEventsProperties.isIncludeStepContext() && event.getContext() != null) {
-            payload.put("context", event.getContext());
-        }
-        
-        if (event.getResult() != null) {
-            payload.put("result", event.getResult());
-        }
-        
-        if (event.getError() != null) {
-            payload.put("error", event.getError());
-        }
-        
-        // Add metadata
-        payload.putAll(stepEventsProperties.getMetadata());
-        
-        return payload;
-    }
+/**
+ * Interface for publishing orchestration events (saga, TCC, and workflow).
+ * Implemented internally by the orchestration engine and published
+ * through the configured EventGateway.
+ */
+public interface OrchestrationEventPublisher {
+    Mono<Void> publish(OrchestrationEvent event);
 }
 ```
 
-### StepEventsProperties
+### Configuration
 
-```java
-package org.fireflyframework.core.messaging.config;
-
-@Configuration
-@ConfigurationProperties(prefix = "step-events")
-public class StepEventsProperties {
-    
-    private boolean enabled = false;
-    private PublisherType publisherType;
-    private String connectionId = "default";
-    private String eventDestination;
-    private boolean includeStepContext = true;
-    private String eventTypePrefix = "saga";
-    private Map<String, String> metadata = new HashMap<>();
-    
-    // Validation
-    @PostConstruct
-    public void validate() {
-        if (enabled) {
-            if (publisherType == null) {
-                throw new IllegalArgumentException("step-events.publisher-type must be specified when step events are enabled");
-            }
-            if (eventDestination == null || eventDestination.isEmpty()) {
-                throw new IllegalArgumentException("step-events.event-destination must be specified when step events are enabled");
-            }
-        }
-    }
-    
-    // Getters and setters...
-}
+```yaml
+firefly:
+  orchestration:
+    enabled: true
+    saga:
+      default-timeout: 30s
+    tcc:
+      default-timeout: 30s
+    workflow:
+      default-timeout: 60s
 ```
+
+See the [fireflyframework-orchestration](../../fireflyframework-orchestration/) documentation for
+full API details on Saga, TCC, and Workflow patterns.
 
 ## Serialization API
 

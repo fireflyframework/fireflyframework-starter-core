@@ -439,7 +439,7 @@ public class OrderService {
 
 ### Firefly Ecosystem
 - **fireflyframework-cqrs**: Command/Query separation with event sourcing
-- **lib-transactional-engine**: Saga orchestration and transaction management
+- **fireflyframework-orchestration**: Saga, TCC, and Workflow orchestration
 - **fireflyframework-domain**: Domain-driven design components and patterns
 
 ### Spring Ecosystem  

@@ -626,7 +626,7 @@ logging:
 
 3. **CQRS and Saga Integration**:
    - Add `fireflyframework-cqrs` for command/query separation
-   - Add `lib-transactional-engine` for saga orchestration
+   - Add `fireflyframework-orchestration` for saga, TCC, and workflow orchestration
    - Implement complex business workflows
 
 4. **Testing**:

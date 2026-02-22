@@ -48,8 +48,8 @@ Firefly Framework
 ├─────────────────────────────────────────────────────────────┤
 │                  Integration Layer                          │
 │  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────┐│
-│  │  CQRS/Saga      │  │  Step Events    │  │  Transactional││
-│  │  Integration    │  │  Publisher      │  │  Engine      ││
+│  │  CQRS/Saga      │  │  Orchestration  │  │  Workflow    ││
+│  │  Integration    │  │  Events         │  │  Engine      ││
 │  └─────────────────┘  └─────────────────┘  └──────────────┘│
 ├─────────────────────────────────────────────────────────────┤
 │                     Core Services Layer                     │
@@ -112,7 +112,7 @@ org.fireflyframework.core/
 │   ├── resilience/              # Resilience patterns
 │   ├── serialization/           # Message serialization
 │   ├── shutdown/                # Graceful shutdown
-│   ├── stepevents/              # Saga step event integration
+│   ├── orchestration/           # Orchestration engine integration
 │   └── subscriber/              # Message subscribers
 └── web/                         # Reactive web capabilities
     ├── client/                  # WebClient enhancements
@@ -254,8 +254,7 @@ The library provides extensive auto-configuration support:
 | `ServiceRegistryAutoConfiguration` | Service discovery | Service registry dependency present |
 | `WebFluxConfig` | Reactive web setup | WebFlux on classpath |
 | `ActuatorConfig` | Enhanced actuator | Actuator dependency present |
-| `StepEventsAutoConfiguration` | Step events integration | `step-events.enabled=true` |
-| `TransactionalEngineAutoConfiguration` | Transactional engine | Transactional engine on classpath |
+| `OrchestrationAutoConfiguration` | Orchestration engine | Orchestration engine on classpath |
 
 ### Configuration Properties
 
@@ -404,7 +403,7 @@ graph TB
     G --> H[External Systems]
 ```
 
-### Step Events Flow
+### Orchestration Events Flow
 
 ```java
 @SagaStep(id = "validate-customer")
@@ -414,10 +413,10 @@ public Mono<CustomerValidationResult> validateCustomer(@Input CustomerRegistrati
         .email(request.getEmail())
         .phoneNumber(request.getPhoneNumber())
         .build();
-    
-    // 2. Saga engine automatically publishes step events via StepEventPublisherBridge
+
+    // 2. Orchestration engine handles event publishing via its EventGateway
     return queryBus.execute(query);
-    // 3. Step completion triggers event publication to configured messaging system
+    // 3. Step completion triggers event publication through the orchestration engine
 }
 ```
 
@@ -494,19 +493,18 @@ public class SerializerFactory {
 
 ### Observer Pattern
 
+The orchestration engine (`fireflyframework-orchestration`) handles event publishing internally
+through its `EventGateway`. No starter-level bridge is needed. The `OrchestrationEventPublisher`
+interface provides the contract for publishing orchestration events:
+
 ```java
-// Event-driven architecture for step events
-@Component
-public class StepEventPublisherBridge implements StepEventPublisher {
-    @Override
-    public Mono<Void> publishStepEvent(StepEvent event) {
-        return eventPublisher.publish(
-            stepEventsProperties.getEventDestination(),
-            event.getEventType(), 
-            event.getPayload(),
-            event.getTransactionId()
-        );
-    }
+// Orchestration engine event publishing interface
+public interface OrchestrationEventPublisher {
+    /**
+     * Publishes an orchestration event (saga, TCC, or workflow)
+     * through the configured EventGateway.
+     */
+    Mono<Void> publish(OrchestrationEvent event);
 }
 ```
 

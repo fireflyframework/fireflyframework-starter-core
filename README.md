@@ -39,7 +39,7 @@ This starter is designed to accelerate the development of infrastructure-layer m
 - OpenTelemetry distributed tracing integration
 - Spring Cloud Config client auto-configuration
 - Service registry integration (Eureka, Consul, Kubernetes)
-- Step event publishing bridge for the transactional engine
+- Orchestration engine integration (Saga, TCC, Workflow)
 - Firefly branded startup banner
 - Transaction context web filter
 - Logstash-compatible structured logging
