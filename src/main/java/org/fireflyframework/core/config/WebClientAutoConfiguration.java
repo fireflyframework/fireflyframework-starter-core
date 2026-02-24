@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.fireflyframework.core.web.resilience.WebClientResilienceAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.function.client.ClientRequest;
@@ -68,7 +69,7 @@ import static org.fireflyframework.core.config.TransactionFilter.TRANSACTION_ID_
  *   `webclient.enabled` property.
  */
 @Slf4j
-@AutoConfiguration
+@AutoConfiguration(after = WebClientResilienceAutoConfiguration.class)
 @ConditionalOnProperty(name = "firefly.webclient.enabled", havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(WebClientProperties.class)
 public class WebClientAutoConfiguration {
