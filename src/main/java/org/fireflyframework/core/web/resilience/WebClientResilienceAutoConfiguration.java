@@ -63,7 +63,7 @@ public class WebClientResilienceAutoConfiguration {
      * @return the CircuitBreakerRegistry
      */
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(name = "webClientCircuitBreakerRegistry")
     public CircuitBreakerRegistry webClientCircuitBreakerRegistry() {
         CircuitBreakerConfig circuitBreakerConfig = CircuitBreakerConfig.custom()
                 .failureRateThreshold(properties.getCircuitBreaker().getFailureRateThreshold())
@@ -82,7 +82,7 @@ public class WebClientResilienceAutoConfiguration {
      */
     @Bean
     @Primary
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(name = "webClientRetryRegistry")
     public RetryRegistry webClientRetryRegistry() {
         RetryConfig retryConfig = RetryConfig.custom()
                 .maxAttempts(properties.getRetry().getMaxAttempts())
@@ -99,7 +99,7 @@ public class WebClientResilienceAutoConfiguration {
      * @return the TimeLimiterRegistry
      */
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(name = "webClientTimeLimiterRegistry")
     public TimeLimiterRegistry webClientTimeLimiterRegistry() {
         TimeLimiterConfig timeLimiterConfig = TimeLimiterConfig.custom()
                 .timeoutDuration(Duration.ofMillis(properties.getTimeout().getTimeoutMs()))
@@ -114,7 +114,7 @@ public class WebClientResilienceAutoConfiguration {
      * @return the BulkheadRegistry
      */
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(name = "webClientBulkheadRegistry")
     public BulkheadRegistry webClientBulkheadRegistry() {
         BulkheadConfig bulkheadConfig = BulkheadConfig.custom()
                 .maxConcurrentCalls(properties.getBulkhead().getMaxConcurrentCalls())
